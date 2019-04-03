@@ -37,8 +37,13 @@ grad = zeros(size(theta));
 %
 
 
+hypothesis=sigmoid(X*theta);
+temp = theta; 
+temp(1) = 0;
+regularized=(lambda/(2*m))*(temp'*theta);
 
-
+J = (1/m)*(sum(-y.*log(hypothesis)-((1-y).*log(1-hypothesis))))+regularized;
+grad=(X'*(hypothesis-y)+lambda*temp)/m;
 
 
 
